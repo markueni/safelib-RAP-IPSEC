@@ -1,0 +1,4 @@
+[submodule "sgx-secrets-after-ra"]
+	path = sgx-secrets-after-ra
+	url = https://github.com/piotr-roslaniec/sgx-secrets-after-ra
+    branch = vagrant
