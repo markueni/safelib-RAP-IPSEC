@@ -47,9 +47,6 @@ Vagrant.configure('2') do |config|
     config.vm.provision :shell, path: 'provision-common.sh'
     config.vm.provision :shell, path: 'provision-certificates.sh'
     config.vm.provision :shell, path: 'provision-vpn-device.sh'
-    if Vagrant::Util::Platform.windows? then
-        config.vm.provision :shell, inline: "sysctl net.ipv4.ip_forward=1"
-    end
   end
 
   config.vm.define 'sun' do |config|
@@ -60,9 +57,6 @@ Vagrant.configure('2') do |config|
     config.vm.provision :shell, inline: "echo '#{config_sun_ip} #{config_sun_fqdn}' >>/etc/hosts"
     config.vm.provision :shell, path: 'provision-common.sh'
     config.vm.provision :shell, path: 'provision-vpn-device.sh'
-    if Vagrant::Util::Platform.windows? then
-        config.vm.provision :shell, inline: "sysctl net.ipv4.ip_forward=1"
-    end
   end
 
   config.vm.define 'moon-ubuntu' do |config|
@@ -70,8 +64,8 @@ Vagrant.configure('2') do |config|
     config.vm.network :private_network, ip: config_moon_ubuntu_ip, netmask: '255.255.0.0', libvirt__forward_mode: 'route', libvirt__dhcp_enabled: false
     config.vm.provision :shell, path: 'provision-common.sh'
     config.vm.provision :shell, path: 'provision-ubuntu.sh'
-    if Vagrant::Util::Platform.windows? then
-        config.vm.provision :shell, inline: "ip route add 10.2.0.0/24 via #{config_moon_internal_ip} dev eth1"
+    if OS.windows? 
+        config.vm.provision :shell, inline: "route delete default gw #{config_sun_internal_ip} enp0s3 ; route add default gw #{config_moon_internal_ip} enp0s8"
     end
 end
 
@@ -81,8 +75,8 @@ end
     config.vm.provision :shell, path: 'provision-common.sh'
     config.vm.provision :shell, path: 'provision-ubuntu.sh'
     config.vm.provision :shell, path: 'provision-sgx-sdk.sh'
-    if Vagrant::Util::Platform.windows? then
-        config.vm.provision :shell, inline: "ip route add 10.1.0.0/24 via #{config_sun_internal_ip} dev eth1"
+    if OS.windows?
+        config.vm.provision :shell, inline: "ip route add 10.1.0.0/24 via #{config_sun_internal_ip} dev enp0s8"
     end
   end
 
