@@ -1,0 +1,87 @@
+sp.log
+client.log
+install-sh
+compile
+depcomp
+missing
+ref_sp
+public
+settings.*
+win32/agent_win32.cpp
+win32/agent_win32.h
+.deps
+autom4te.cache
+.idea
+stamp-h1
+sp
+run-server
+run-client
+policy
+mrsigner
+Enclave_u.c
+Enclave_u.h
+config.status
+config.log
+client
+Enclave/Enclave_t.h
+Enclave/Enclave_t.c
+
+# should be in Enclave/ dir only
+./Enclave.edl
+
+# sensitive files
+AttestationReportSigningCACert.pem
+settings
+
+# successfull output
+1
+
+# Created by https://www.gitignore.io/api/c,c++,clion,cmake,intellij
+# Edit at https://www.gitignore.io/?templates=c,c++,clion,cmake,intellij
+
+### C ###
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# End of https://www.gitignore.io/api/c,c++,clion,cmake,intellij
