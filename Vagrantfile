@@ -35,8 +35,7 @@ Vagrant.configure('2') do |config|
     ]
   end
 
-  config.vm.synced_folder ".", "/vagrant/", type: "rsync", disabled: false,
-    rsync__exclude: ".git/"
+  config.vm.provision "file", source: ".", destination: "/home/vagrant"
 
   config.vm.define 'moon' do |config|
     config.vm.hostname = config_moon_fqdn
@@ -64,10 +63,7 @@ Vagrant.configure('2') do |config|
     config.vm.network :private_network, ip: config_moon_ubuntu_ip, netmask: '255.255.0.0', libvirt__forward_mode: 'route', libvirt__dhcp_enabled: false
     config.vm.provision :shell, path: 'provision-common.sh'
     config.vm.provision :shell, path: 'provision-ubuntu.sh'
-    if OS.windows? 
-        config.vm.provision :shell, inline: "route delete default gw #{config_sun_internal_ip} enp0s3 ; route add default gw #{config_moon_internal_ip} enp0s8"
-    end
-end
+  end
 
   config.vm.define 'sun-ubuntu' do |config|
     config.vm.hostname = config_sun_ubuntu_fqdn
@@ -75,9 +71,6 @@ end
     config.vm.provision :shell, path: 'provision-common.sh'
     config.vm.provision :shell, path: 'provision-ubuntu.sh'
     config.vm.provision :shell, path: 'provision-sgx-sdk.sh'
-    if OS.windows?
-        config.vm.provision :shell, inline: "ip route add 10.1.0.0/24 via #{config_sun_internal_ip} dev enp0s8"
-    end
   end
 
 end
