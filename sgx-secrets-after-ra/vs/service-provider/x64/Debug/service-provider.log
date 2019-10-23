@@ -1,0 +1,25 @@
+﻿  base64.c
+  byteorder.c
+  crypto.c
+  fileio.c
+  hexutil.c
+  logfile.c
+  getopt.c
+  Generating Code...
+  common.cpp
+c:\users\enio\desktop\safelib_implementation\safelib-rap-ipsec\sgx-secrets-after-ra\common.cpp(78): warning C4101: 'timetmp': unreferenced local variable
+  iasrequest.cpp
+  msgio.cpp
+  sp.cpp
+c:\users\enio\desktop\safelib_implementation\safelib-rap-ipsec\sgx-secrets-after-ra\sp.cpp(331): warning C4244: '=': conversion from 'unsigned long' to 'sgx_prod_id_t', possible loss of data
+c:\users\enio\desktop\safelib_implementation\safelib-rap-ipsec\sgx-secrets-after-ra\sp.cpp(351): warning C4244: '=': conversion from 'unsigned long' to 'sgx_isv_svn_t', possible loss of data
+c:\users\enio\desktop\safelib_implementation\safelib-rap-ipsec\sgx-secrets-after-ra\sp.cpp(710): warning C4477: 'fprintf' : format string '%lu' requires an argument of type 'unsigned long', but variadic argument 2 has type 'size_t'
+  c:\users\enio\desktop\safelib_implementation\safelib-rap-ipsec\sgx-secrets-after-ra\sp.cpp(710): note: consider using '%zu' in the format string
+  agent_winhttp.cpp
+  Generating Code...
+     Creating library C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\x64\Debug\sp.lib and object C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\x64\Debug\sp.exp
+  service-provider.vcxproj -> C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\x64\Debug\sp.exe
+  C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\service-provider\..\run-client.cmd
+  C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\service-provider\..\run-server.cmd
+  C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\service-provider\..\settings.cmd
+  3 File(s) copied

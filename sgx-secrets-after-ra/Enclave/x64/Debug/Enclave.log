@@ -1,0 +1,20 @@
+﻿  Creating proxy/bridge routines
+  Enclave.cpp
+  Enclave_t.c
+     Creating library C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\x64\Debug\Enclave.lib and object C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\x64\Debug\Enclave.exp
+  Enclave.vcxproj -> C:\Users\enio\Desktop\SafeLib_implementation\safelib-RAP-IPSEC\sgx-secrets-after-ra\vs\x64\Debug\Enclave.dll
+  sign the enclave
+  The required memory is 0x239000.
+  Succeed.
+  <EnclaveConfiguration>
+      <ProdID>0</ProdID>
+      <ISVSVN>1</ISVSVN>
+      <StackMaxSize>0x40000</StackMaxSize>
+      <HeapMaxSize>0x100000</HeapMaxSize>
+      <TCSNum>1</TCSNum>
+      <TCSPolicy>1</TCSPolicy>
+      <!-- Recommend changing 'DisableDebug' to 1 to make the enclave undebuggable for enclave release -->
+      <DisableDebug>0</DisableDebug>
+      <MiscSelect>0</MiscSelect>
+      <MiscMask>0xFFFFFFFF</MiscMask>
+  </EnclaveConfiguration>
