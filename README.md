@@ -92,6 +92,6 @@ Now checkout from git manually:
 
     mkdir -p ~/project
     cd project
-    git clone https://github.com/piotr-roslaniec/sgx-secrets-after-ra
+    
 
 Keep in mind that local changes _won't_ be propagated from host OS to VM.
