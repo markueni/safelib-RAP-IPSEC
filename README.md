@@ -92,6 +92,10 @@ Now checkout from git manually:
 
     mkdir -p ~/project
     cd project
+<<<<<<< HEAD
     git clone
+=======
+    
+>>>>>>> d863a25ace194daa17370dbefc6dbdef68262a5d
 
 Keep in mind that local changes _won't_ be propagated from host OS to VM.
