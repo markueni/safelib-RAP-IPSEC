@@ -1,26 +1,35 @@
 #!/bin/bash
-# Ref https://download.01.org/intel-sgx/sgx-linux/2.7/docs/Intel_SGX_Installation_Guide_Linux_2.7_Open_Source.pdf
+set -eux
+
 sudo mkdir -p /usr/src/sdk
-cp -r /vagrant/sgx-files/* /usr/src/sdk
+cp -r /vagrant/sgx-files /usr/src/sdk/sgx-files
 sudo chown -R vagrant /usr/src/sdk
 cd /usr/src/sdk
 
-sudo apt-get -y install libssl-dev libcurl4-openssl-dev libprotobuf-dev
-sudo apt-get -y install build-essential python
+sudo apt-get update && apt-get install -yq --no-install-recommends ca-certificates build-essential ocaml ocamlbuild automake autoconf \
+    libtool wget python libssl-dev libssl-dev libcurl4-openssl-dev protobuf-compiler git libprotobuf-dev alien cmake debhelper uuid-dev \
+    libxml2-dev xxd cpuid libelf-dev
 
-sudo ./sgx_linux_x64_driver_2.6.0_4f5bb63.bin 
-sudo dpkg -i ./libsgx-enclave-common_2.7.100.4-bionic1_amd64.deb
-sudo dpkg -i ./libsgx-enclave-common-dbgsym_2.7.100.4-bionic1_amd64.ddeb
-echo 'deb [arch=amd64] https://download.01.org/intel-sgx/sgx_repo/ubuntu bionic main' | sudo tee /etc/apt/sources.list.d/intelsgx.list
+git clone https://github.com/01org/dynamic-application-loader-host-interface.git &&
+    cd dynamic-application-loader-host-interface &&
+    cmake . -DCMAKE_BUILD_TYPE=Release -DINIT_SYSTEM=SysVinit &&
+    make &&
+    make install &&
+    cd .. && rm -rf dynamic-application-loader-host-interface
 
-wget -qO- https://download.01.org/intel-sgx/sgx_repo/ubuntu/intel-sgx-deb.key | sudo apt-key add -
-sudo apt-get -y update
-sudo apt-get -y install libsgx-enclave-common
-sudo apt-get -y install libsgx-enclave-common-dbgsym
+cd /usr/src/sdk
+cp sgx-files/install-psw.patch ./
 
-# echo 'yes' | ./sgx_linux_x64_sdk_2.7.100.4.bin
-./sgx_linux_x64_sdk_2.7.100.4.bin --prefix=/opt/intel
+git clone -b sgx_2.6 --depth 1 https://github.com/intel/linux-sgx &&
+    cd linux-sgx &&
+    patch -p1 -i ../install-psw.patch &&
+    ./download_prebuilt.sh 2>/dev/null &&
+    make -s -j$(nproc) sdk_install_pkg psw_install_pkg &&
+    ./linux/installer/bin/sgx_linux_x64_sdk_*.bin --prefix=/opt/intel &&
+    ./linux/installer/bin/sgx_linux_x64_psw_*.bin &&
+    cd .. && rm -rf linux-sgx/
 
-# Libiraries for compiling sgx sever code!
-sudo apt-get -y install autotools-dev
-sudo apt-get -y install automake
+cd /usr/src/sdk
+sudo cp sgx-files/jhi.conf /etc/jhi/jhi.conf
+
+./sgx-files/entrypoint.sh
